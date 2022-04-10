@@ -1,0 +1,4 @@
+#Use Your Aliyun Access Key
+*.properties
+#Your local Data
+Resource/
