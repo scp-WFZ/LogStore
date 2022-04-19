@@ -1,4 +1,4 @@
-package OSS;
+package CloudStorage;
 
 import Config.Config;
 

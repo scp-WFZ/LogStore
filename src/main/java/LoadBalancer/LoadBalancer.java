@@ -1,4 +1,4 @@
-package Balancer;
+package LoadBalancer;
 
 public class LoadBalancer {
 }
