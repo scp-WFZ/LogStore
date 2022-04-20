@@ -33,10 +33,6 @@ public class FileDownLoader {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 
@@ -74,10 +70,6 @@ public class FileDownLoader {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 }

@@ -37,10 +37,6 @@ public class FileUploader {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 
@@ -69,10 +65,6 @@ public class FileUploader {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 
@@ -110,11 +102,6 @@ public class FileUploader {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            // 关闭OSSClient。
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 }

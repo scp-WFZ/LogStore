@@ -19,32 +19,13 @@ public class OSSclient {
     private static final String EndPoint = Config.getEndPoint();
     private static final String AccessKeyId = Config.getAccessKeyId();
     private static final String AccessKeySecret = Config.getAccessKeySecret();
-    private static OSS ossClient = null;
+    private static final OSS ossClient = new OSSClientBuilder().build(EndPoint, AccessKeyId, AccessKeySecret);
 
-    public OSSclient() {
-        try {
-            ossClient = new OSSClientBuilder().build(EndPoint, AccessKeyId, AccessKeySecret);
-        } catch (OSSException oe) {
-            System.out.println("Caught an OSSException, which means your request made it to OSS, "
-                    + "but was rejected with an error response for some reason.");
-            System.out.println("Error Message:" + oe.getErrorMessage());
-            System.out.println("Error Code:" + oe.getErrorCode());
-            System.out.println("Request ID:" + oe.getRequestId());
-            System.out.println("Host ID:" + oe.getHostId());
-        } catch (ClientException ce) {
-            System.out.println("Caught an ClientException, which means the client encountered "
-                    + "a serious internal problem while trying to communicate with OSS, "
-                    + "such as not being able to access the network.");
-            System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossClient != null) {
-                ossClient.shutdown();
-            }
-        }
-    }
 
-    public static void main(String[] args) {
-        OSSclient ossclient = new OSSclient();
+    public static void main(String[] args) throws Exception {
+        //FileUploader.uploadFile(ossClient,BucketName,"Diana.jpg","Resource/Diana.jpg");
+        //FileDownLoader.downloadFile(ossClient,BucketName,"test.csv","Resource/test.csv");
+        //FileManager.selectCsvFile(ossClient, BucketName, "test.csv", "select * from ossobject as s where s.age > 20");
         ossClient.shutdown();
     }
 }

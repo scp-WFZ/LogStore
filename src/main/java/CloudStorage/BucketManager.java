@@ -72,10 +72,6 @@ public class BucketManager {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
     /** 列出ossclient中前缀为prefix的所有Buckets
@@ -103,10 +99,6 @@ public class BucketManager {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
     /** 列出ossclient中数量为keys, 前缀为prefix的Buckets
@@ -136,10 +128,6 @@ public class BucketManager {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 
@@ -170,7 +158,7 @@ public class BucketManager {
         }else {
             System.out.println("Bucket doesn't exist");
         }
-        ossclient.shutdown();
+
     }
 
     /**
@@ -198,10 +186,6 @@ public class BucketManager {
                     + "a serious internal problem while trying to communicate with OSS, "
                     + "such as not being able to access the network.");
             System.out.println("Error Message:" + ce.getMessage());
-        } finally {
-            if (ossclient != null) {
-                ossclient.shutdown();
-            }
         }
     }
 
