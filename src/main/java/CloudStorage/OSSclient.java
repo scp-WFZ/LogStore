@@ -44,10 +44,10 @@ public class OSSclient {
     }
 
     public static void main(String[] args) throws Exception {
-        initBucket();
-        testFileUpload();
-        testFileDownload();
-        testFileManage();
+//        initBucket();
+//        testFileUpload();
+//        testFileDownload();
+//        testFileManage();
         testFileSelect();
         ossClient.shutdown();
     }
