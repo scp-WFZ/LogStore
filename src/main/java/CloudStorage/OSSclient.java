@@ -21,11 +21,10 @@ public class OSSclient {
     private static final String AccessKeySecret = Config.getAccessKeySecret();
     private static final OSS ossClient = new OSSClientBuilder().build(EndPoint, AccessKeyId, AccessKeySecret);
 
-
     public static void main(String[] args) throws Exception {
-        //FileUploader.uploadFile(ossClient,BucketName,"Diana.jpg","Resource/Diana.jpg");
-        //FileDownLoader.downloadFile(ossClient,BucketName,"test.csv","Resource/test.csv");
-        //FileManager.selectCsvFile(ossClient, BucketName, "test.csv", "select * from ossobject as s where s.age > 20");
+        FileUploader.uploadFile(ossClient,BucketName,"test.csv","Resource/test.csv");
+        FileDownLoader.downloadFile(ossClient,BucketName,"test.csv","Resource/test.csv");
+        FileManager.selectCsvFile(ossClient, BucketName, "test.csv", "select * from ossobject as s where s.age > 20");
         ossClient.shutdown();
     }
 }
