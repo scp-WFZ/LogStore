@@ -6,6 +6,7 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.*;
 
 import java.io.File;
+import java.io.InputStream;
 
 public class FileUploader {
 
@@ -49,9 +50,14 @@ public class FileUploader {
      */
     public static void appendFile (OSS ossclient, String bucketName, String objectName, String filePath) throws Exception {
         try {
-            AppendObjectRequest appendObjectRequest = new AppendObjectRequest(bucketName, objectName, new File(filePath));
-            // 指定追加位置
-            appendObjectRequest.setPosition(0L);
+            AppendObjectRequest appendObjectRequest = new AppendObjectRequest(bucketName, objectName,new File(filePath));
+            long position = 0L;
+            if (FileManager.findFile(ossclient,bucketName,objectName)){
+                OSSObject ossObject = ossclient.getObject(bucketName,objectName);
+                InputStream inputStream = ossObject.getObjectContent();
+                position = (long)inputStream.available();
+            }
+            appendObjectRequest.setPosition(position);
             AppendObjectResult appendObjectResult = ossclient.appendObject(appendObjectRequest);
         } catch (OSSException oe) {
             System.out.println("Caught an OSSException, which means your request made it to OSS, "

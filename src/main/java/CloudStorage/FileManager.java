@@ -15,7 +15,7 @@ public class FileManager {
      * @param objectName: OSS上的文件名
      * @param filePath: 本地文件完整路径
      */
-    public static boolean findFile (OSS ossclient, String bucketName, String objectName, String filePath) throws Exception {
+    public static boolean findFile (OSS ossclient, String bucketName, String objectName) throws Exception {
         return ossclient.doesObjectExist(bucketName, objectName);
     }
 
@@ -31,6 +31,7 @@ public class FileManager {
             do {
                 objectListing = ossclient.listObjects(new ListObjectsRequest(bucketName).withMarker(nextMarker));
                 List<OSSObjectSummary> sums = objectListing.getObjectSummaries();
+                System.out.println("Files List Results:");
                 for (OSSObjectSummary s : sums) {
                     System.out.println(" - " + s.getKey());
                 }
@@ -64,8 +65,9 @@ public class FileManager {
             do {
                 objectListing = ossclient.listObjects(new ListObjectsRequest(bucketName).withMarker(nextMarker).withPrefix(prefix));
                 List<OSSObjectSummary> sums = objectListing.getObjectSummaries();
+                System.out.println("Files List Results:");
                 for (OSSObjectSummary s : sums) {
-                    System.out.println("\t" + s.getKey());
+                    System.out.println(" - " + s.getKey());
                 }
                 nextMarker = objectListing.getNextMarker();
             } while (objectListing.isTruncated());
@@ -86,6 +88,9 @@ public class FileManager {
 
     /**
      * 使用SELECT语句查询文件内容
+     * SQL语句： Select ? From ? Where ?
+     * 数据类型：string, int, double, decimal, timestamp, bool
+     * 操作：逻辑条件(AND,OR,NOT), 算术表达式(+ - *), 比较操作(>, =, <, >=, <=, !=）, String操作(LIKE, ||)
      * @param ossclient: OSS客户端
      * @param bucketName: Bucket的名字
      * @param objectName: 被查询的文件名
@@ -110,6 +115,7 @@ public class FileManager {
         // 使用SELECT语句查询文件中的数据。
         OSSObject ossObject = ossclient.selectObject(selectObjectRequest);
         // 读取结果
+        System.out.println("Select Results:");
         BufferedReader reader = new BufferedReader(new InputStreamReader(ossObject.getObjectContent()));
         String line = null;
         while ((line = reader.readLine()) != null) {

@@ -4,7 +4,6 @@ import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.*;
-
 import java.util.List;
 
 public class BucketManager {
@@ -19,9 +18,9 @@ public class BucketManager {
                 CreateBucketRequest createBucketRequest = new CreateBucketRequest(bucketName);
                 // 设置存储空间的存储类型为标准存储为例介绍。
                 //createBucketRequest.setStorageClass(StorageClass.Standard);
-                // 数据容灾类型默认为本地冗余存储，即DataRedundancyType.LRS。如果需要设置数据容灾类型为同城冗余存储，请设置为DataRedundancyType.ZRS。
+                // 数据容灾类型默认为本地冗余存储，可设置为同城冗余存储DataRedundancyType.ZRS。
                 //createBucketRequest.setDataRedundancyType(DataRedundancyType.ZRS);
-                // 设置存储空间的权限为公共读，默认为私有。
+                // 设置存储空间的权限为公共读。
                 //createBucketRequest.setCannedACL(CannedAccessControlList.PublicRead);
                 // 创建存储空间。
                 ossclient.createBucket(createBucketRequest);
@@ -56,7 +55,7 @@ public class BucketManager {
     public static void listBuckets (OSS ossclient) throws Exception {
         try {
             List<Bucket> buckets = ossclient.listBuckets();
-            System.out.println("List Results:");
+            System.out.println("Buckets List Results:");
             for (Bucket bucket : buckets) {
                 System.out.println(" - " + bucket.getName());
             }
@@ -83,7 +82,7 @@ public class BucketManager {
             ListBucketsRequest listBucketsRequest = new ListBucketsRequest();
             listBucketsRequest.setPrefix(prefix);
             BucketList bucketList = ossclient.listBuckets(listBucketsRequest);
-            System.out.println("List Results:");
+            System.out.println("Buckets List Results:");
             for (Bucket bucket : bucketList.getBucketList()) {
                 System.out.println(" - " + bucket.getName());
             }
@@ -112,7 +111,7 @@ public class BucketManager {
             listBucketsRequest.setPrefix(prefix);
             listBucketsRequest.setMaxKeys(keys);
             BucketList bucketList = ossclient.listBuckets(listBucketsRequest);
-            System.out.println("List Results:");
+            System.out.println("Buckets List Results:");
             for (Bucket bucket : bucketList.getBucketList()) {
                 System.out.println(" - " + bucket.getName());
             }
